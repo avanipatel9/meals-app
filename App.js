@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import 'react-native-gesture-handler';
+
+import MealsNavigator from './navigation/MealsNavigator';
 
 const fetchFonts = () => {
   Font.loadAsync({
@@ -25,8 +28,6 @@ export default function App() {
   }
 
   return (
-    <View>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <MealsNavigator />
   );
 }
