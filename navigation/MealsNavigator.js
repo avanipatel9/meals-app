@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import { Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
@@ -33,7 +34,7 @@ const MealsNavigator = createStackNavigator(
     }
 );
 
-const MealsFavTabNavigator = createBottomTabNavigator({
+const tabScreenConfig = {
     Meals: {
         screen: MealsNavigator,
         navigationOptions: {
@@ -43,10 +44,12 @@ const MealsFavTabNavigator = createBottomTabNavigator({
                     size={25}
                     color={tabInfo.tintColor}
                 />
-            }
+            },
+            tabBarColor: Colors.primaryColor
         }
     },
-    Favorites: {screen: FavoritesScreen, 
+    Favorites: {
+        screen: FavoritesScreen,
         navigationOptions: {
             tabBarLabel: 'Favorites!',
             tabBarIcon: (tabInfo) => {
@@ -55,14 +58,27 @@ const MealsFavTabNavigator = createBottomTabNavigator({
                     size={25}
                     color={tabInfo.tintColor}
                 />
-            }
+            },
+            tabBarColor: Colors.accentColor
         }
     }
-}, 
-{
-    tabBarOptions: {
-        activeTintColor: Colors.accentColor
-    }
-});
+};
+
+const MealsFavTabNavigator =
+    Platform.OS === 'android'
+        ? createMaterialBottomTabNavigator(tabScreenConfig, {
+            activeColor: 'white',
+            shifting: true,
+            //if shifting is false then tabBarColor in tabScreenConfig will not have any effect. To change tabBarColor with shifting: false
+            //shifting: false,
+            // barStyle: {
+            //     backgroundColor: Colors.primaryColor
+            // }
+        })
+        : createBottomTabNavigator(tabScreenConfig, {
+            tabBarOptions: {
+                activeTintColor: Colors.accentColor
+            }
+        });
 
 export default createAppContainer(MealsFavTabNavigator);
