@@ -33,5 +33,18 @@
   "devDependencies": {
     "@babel/core": "^7.9.0"
   },
-  "private": true
+  "private": true,
+  "name": "meals-app",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avanipatel9/meals-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avanipatel9/meals-app/issues"
+  },
+  "homepage": "https://github.com/avanipatel9/meals-app#readme",
+  "description": ""
 }
