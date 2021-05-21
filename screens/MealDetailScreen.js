@@ -1,10 +1,16 @@
 import React from 'react';
-import { ScrollView, Image, View, Text, StyleSheet, FlatList } from 'react-native';
+import { ScrollView, Image, View, Text, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { MEALS } from '../data/dummy-data';
 import HeaderButton from '../components/HeaderButton';
 import DefaultText from '../components/DefaultText';
+
+const ListItem = props => {
+    return (<View style={styles.listItem}>
+        <DefaultText>{props.children}</DefaultText>
+    </View>)
+}
 
 const MealDetailScreen = props => {
 
@@ -21,10 +27,9 @@ const MealDetailScreen = props => {
                 <DefaultText>{selectedMeal.affordability.toUpperCase()}</DefaultText>
             </View>
             <Text style={styles.title}>Ingredients</Text>
-            
+            {selectedMeal.ingredients.map(ingredient => (<ListItem key={ingredient}>{ingredient}</ListItem>))}
             <Text style={styles.title}>Steps</Text>
-            {selectedMeal.steps.map(step => (<Text key={step}>{step}</Text>))}
-            <Text>List of Steps</Text>
+            {selectedMeal.steps.map(step => (<ListItem key={step}>{step}</ListItem>))}
         </ScrollView>
     );
 };
@@ -58,8 +63,14 @@ const styles = StyleSheet.create({
         fontFamily: 'open-sans-bold',
         fontSize: 22,
         textAlign: 'center'
+    },
+    listItem: {
+        marginVertical: 10,
+        marginHorizontal: 20,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        padding: 10
     }
-
 });
 
 export default MealDetailScreen;
